@@ -1,79 +1,88 @@
-# BudgetTracker - Kişisel Bütçe Yönetimi
+# BudgetTracker - Personal Budget Management
 
-React Native + Expo Router ile geliştirilmiş modern ve şık bir gelir/gider takip uygulaması. Veriler cihaz içinde SQLite ile güvenle saklanır; kullanıcı girişi, işlem yönetimi, haftalık bütçe limiti ve detaylı raporlama grafiklerini içerir.
+A modern and stylish income/expense tracking application developed with React Native + Expo Router. Data is securely stored on-device using SQLite; it features user login, transaction management, weekly budget limits, and detailed reporting charts.
 
-## İçerik
-- Özellikler
-- Ekranlar
-- Kurulum ve Çalıştırma
-- Komutlar
-- Mimarî ve Klasör Yapısı
-- Teknolojiler
-- Geliştirme Notları
+## Contents
 
-## Özellikler
-- Gelir ve gider işlemleri ekleme/silme
-- Haftalık bütçe limiti belirleme ve ilerleme çubuğu
-- Aylık toplam gelir/gider özetleri
-- Son 7 gün gelir/gider çizgi grafiği ve kategori bazlı bar grafik
-- Local email/şifre ile basit oturum yönetimi (SQLite üzerinde tablo)
-- Şık arayüz, animasyonlar ve toast bildirimleri
+  - Features
+  - Screens
+  - Installation and Running
+  - Commands
+  - Architecture and Folder Structure
+  - Technologies
+  - Development Notes
 
-## Ekranlar
-- Giriş / Kayıt: Basit e‑posta/şifre ile yerel kullanıcı oluşturma ve giriş
-- Ana Sayfa (Dashboard): Bakiye, gelir, gider kartları; haftalık bütçe ilerlemesi; son işlemler listesi
-- İşlem Ekle: Gelir/gider türü, tutar, açıklama, kategori ve tarih/saat seçimi
-- Raporlar: Son 7 gün çizgi grafiği, aylık kategori bazlı bar grafiği, kategori detayları
+## Features
 
-## Kurulum ve Çalıştırma
-Önkoşullar: Node.js LTS, pnpm/yarn/npm, Expo CLI (opsiyonel), Android Studio veya Xcode (native çalıştırma için)
+  - Add/delete income and expense transactions
+  - Set weekly budget limits and view progress bar
+  - Monthly total income/expense summaries
+  - Line chart for income/expenses (last 7 days) and category-based bar charts
+  - Simple session management with local email/password (via SQLite table)
+  - Stylish UI, animations, and toast notifications
+
+## Screens
+
+  - **Login / Register:** Local user creation and login via simple email/password
+  - **Home (Dashboard):** Balance, income, and expense cards; weekly budget progress; recent transactions list
+  - **Add Transaction:** Select income/expense type, amount, description, category, and date/time
+  - **Reports:** 7-day line chart, monthly category-based bar chart, category details
+
+## Installation and Running
+
+Prerequisites: Node.js LTS, pnpm/yarn/npm, Expo CLI (optional), Android Studio or Xcode (for native execution).
 
 ```bash
-# Bağımlılıkları yükle
+# Install dependencies
 npm install
 
-# Geliştirme sunucusunu başlat
+# Start development server
 npm run start
 
-# Android cihaz/emülatörde çalıştır
+# Run on Android device/emulator
 npm run android
 
-# iOS simülatörde çalıştır (macOS)
+# Run on iOS simulator (macOS)
 npm run ios
 
-# Web (deneysel)
+# Web (experimental)
 npm run web
 ```
 
-İlk açılışta uygulama `expo-sqlite` ile `transactions` ve `user` tablolarını oluşturur.
+On first launch, the app creates `transactions` and `user` tables using `expo-sqlite`.
 
-## Komutlar
-- `npm run start`: Expo Metro sunucusunu başlatır
-- `npm run android`: Android derleme/çalıştırma
-- `npm run ios`: iOS derleme/çalıştırma
-- `npm run web`: Web hedefi
-- `npm run lint`: Lint
-- `npm test`: Jest (watch)
+## Commands
 
-## Mimarî ve Klasör Yapısı
-- `app/_layout.tsx`: Sağlayıcılar ve SQLite başlatma
-- `app/(auth)/*`: `login.tsx`, `signup.tsx` ve stack düzeni
-- `app/(tabs)/*`: Sekmeler ve sayfalar: `index.tsx` (Dashboard), `add.tsx`, `reports.tsx`
-- `context/BudgetContext.tsx`: SQLite CRUD, toplamlar, haftalık bütçe
-- `context/AuthContext.tsx`: Basit kullanıcı durumu ve çıkış
-- `components/Toast.tsx`: Başarılı/hata bildirimleri
-- `hooks/useFrameworkReady.ts`: Web hazır sinyali
+  - `npm run start`: Starts the Expo Metro server
+  - `npm run android`: Android build/run
+  - `npm run ios`: iOS build/run
+  - `npm run web`: Web target
+  - `npm run lint`: Lint
+  - `npm test`: Jest (watch mode)
 
-## Teknolojiler
-- React Native 0.76, Expo 52, Expo Router 4
-- SQLite (expo-sqlite)
-- date-fns, react-native-chart-kit, react-native-reanimated
-- lucide-react-native ikonları, expo-linear-gradient, expo-blur
+## Architecture and Folder Structure
 
-## Geliştirme Notları
-- Veritabanı: `transactions (id, amount, category, description, date, type)` ve `user (id, email, password)` tabloları `app/_layout.tsx` içinde oluşturulur.
-- Kimlik Doğrulama: Tamamen yerel ve basit; şifreler hash’lenmez. Üretimde güvenlik için uygun bir backend/kimlik sistemi önerilir.
-- Web hedefi sınırlı olabilir; ana hedef mobil.
+  - `app/_layout.tsx`: Providers and SQLite initialization
+  - `app/(auth)/*`: `login.tsx`, `signup.tsx`, and stack layout
+  - `app/(tabs)/*`: Tabs and pages: `index.tsx` (Dashboard), `add.tsx`, `reports.tsx`
+  - `context/BudgetContext.tsx`: SQLite CRUD, totals, weekly budget
+  - `context/AuthContext.tsx`: Simple user state and logout
+  - `components/Toast.tsx`: Success/error notifications
+  - `hooks/useFrameworkReady.ts`: Web ready signal
 
-## Lisans
-Bu proje eğitim ve kişisel kullanım içindir. Gerekli durumlarda lisans ekleyin.
+## Technologies
+
+  - React Native 0.76, Expo 52, Expo Router 4
+  - SQLite (expo-sqlite)
+  - date-fns, react-native-chart-kit, react-native-reanimated
+  - lucide-react-native icons, expo-linear-gradient, expo-blur
+
+## Development Notes
+
+  - **Database:** `transactions (id, amount, category, description, date, type)` and `user (id, email, password)` tables are created within `app/_layout.tsx`.
+  - **Authentication:** Entirely local and simple; passwords are not hashed. A proper backend/authentication system is recommended for production security.
+  - **Platform:** Web target may be limited; the primary target is mobile.
+
+## License
+
+This project is for educational and personal use. Add a license if necessary.
